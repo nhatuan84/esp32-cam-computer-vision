@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<title> ESP32 Camera Computer Vision </title>
+		<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+	</head>
+	<body>
+		<img id='live' src=''>
+	</body>
+</html>
+
+<script>
+
+jQuery(function($){
+	if (!('WebSocket' in window)) {
+		alert('Your browser does not support web sockets');
+	}else{
+		setup()
+	}
+	function setup(){
+		var host = 'ws://192.168.1.8:8080/monitor';
+		var socket = new WebSocket(host);
+		socket.binaryType = 'arraybuffer';
+		if(socket){
+				socket.onopen = function() {
+				}
+				socket.onmessage = function(msg){
+					var bytes = msg.data;
+					var img = document.getElementById('live');
+					img.src = 'data:image/jpg;base64,'+bytes;
+				}
+				socket.onclose = function(){
+					showServerResponse('The connection has been closed.');
+				}
+		}
+	}
+});
+</script>
