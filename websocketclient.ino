@@ -58,7 +58,7 @@ void configCamera(){
 WebSocketsClient webSocket;
  
 const char *ssid      = "I3.41";
-const char *password  = "0908073858";
+const char *password  = "xxx";
 const char *serverIp  = "192.168.1.8";
 const char *camId     = "living room";
 bool connected = false;
